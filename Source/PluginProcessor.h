@@ -1,4 +1,4 @@
-/*
+ /*
   ==============================================================================
 
     This file contains the basic framework code for a JUCE plugin processor.
@@ -36,7 +36,7 @@ public:
     //==============================================================================
     juce::AudioProcessorEditor* createEditor() override;
     bool hasEditor() const override;
-
+    
     //==============================================================================
     const juce::String getName() const override;
 
@@ -57,6 +57,9 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
 private:
+    juce::dsp::Oscillator<float> osc{ [](float x) {return std::sin(x); } };
+    juce::dsp::Gain<float>gain;
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GodulatorAudioProcessor)
 };
